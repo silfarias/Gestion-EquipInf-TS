@@ -1,31 +1,34 @@
 import { IDataBaseConfig } from '../ts/interfaces/db.interface'
-import { Sequelize } from 'sequelize';
+import { Dialect, Sequelize } from 'sequelize';
 import { envConfig } from '../config/environments';
+import { RolModel } from '../models/rols';
 
 export class DbConfig implements IDataBaseConfig {
-    private sequelize: Sequelize;
+    public sequelize: Sequelize;
+
     constructor () {
-        const dbConfig = envConfig.getConfigDataBase()
+        const dbConfig = envConfig.getEnvDataBase()
         this.sequelize = new Sequelize(
-            dbConfig.name,
-            dbConfig.user,
-            dbConfig.password, 
+            dbConfig.dbName,
+            dbConfig.dbUser,
+            dbConfig.dbPassword, 
             {
-                host: dbConfig.host,
-                dialect: dbConfig.dialect as any, // lo convertimos a un tipo aceptado por Sequelize
-                port: dbConfig.port,
+                host: dbConfig.dbHost,
+                dialect: dbConfig.dbDialect as Dialect, // lo convertimos a un tipo aceptado por Sequelize
+                port: parseInt(dbConfig.dbPort, 10)
             }
         )
+        RolModel.initModel(this.sequelize);
     }
-    async connectDb() {
+
+    async connectDb(): Promise<void> {
         try {
-            await this.sequelize.authenticate()
-            console.log(`Se he establecido la conexión a la base de datos`);
+            await this.sequelize.sync({ alter: true });
+            console.log(`Base de datos conectada`);
         } catch (error) {
-            console.log('No se ha podido conectar a la base de datos', error);
+            console.error('No se ha podido conectar a la base de datos', error);
         }
     }
 }
 
-const dbConfig = new DbConfig();
-export { dbConfig }
+export const dbConfig = new DbConfig();

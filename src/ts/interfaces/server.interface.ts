@@ -1,5 +1,5 @@
 export interface IServerConfig {
     middlewares(): void;
     router(): void;
-    listen(): void;
+    listen(): Promise<void>;
 }

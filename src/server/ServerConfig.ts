@@ -4,8 +4,7 @@ import morgan from 'morgan';
 import { IServerConfig } from '../ts/interfaces/server.interface';
 import { envConfig } from '../config/environments';
 import { dbConfig } from '../database/dataBaseConfig';
-// import 'dotenv/config';
-
+import { RolModel } from '../models/rols';
 
 export class ServerConfig implements IServerConfig {
 
@@ -14,7 +13,7 @@ export class ServerConfig implements IServerConfig {
 
     constructor() {
         this.app = express();
-        this.port = envConfig.getPort();
+        this.port = envConfig.port;
         this.middlewares();
         this.router();
     }
@@ -31,10 +30,12 @@ export class ServerConfig implements IServerConfig {
         })
     }
 
-    listen(): void {
-        this.app.listen(this.port, () => {
-            dbConfig.connectDb();
-            console.log(`Servidor corriendo en http://localhost:${this.port}`)
-        })
-    }  
+    async listen(): Promise<void> {
+        try {
+            await dbConfig.connectDb();
+            console.log(`Servidor corriendo en http://localhost:${this.port}`);
+        } catch (error) {
+            console.error('Error al iniciar el servidor:', error);
+        }
+    }
 }
