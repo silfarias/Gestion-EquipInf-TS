@@ -1,13 +1,13 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 
-export class RolModel extends Model {
+export class CategoryModel extends Model {
 
-    declare id: number; // al utilizar declare garantizamos que TS no omitirá el campo
+    declare id: number;
     declare name: string;
     declare description: string;
 
-    static initModel(instancia: Sequelize) { // static para que la clase sea accesible sin necesidad de crear una instancia
-        RolModel.init({ // inicializamos el modelo y lo asociamos con una tabla en la base de datos
+    static initModel(instancia: Sequelize) {
+        CategoryModel.init({ 
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -17,12 +17,15 @@ export class RolModel extends Model {
             }, 
             description: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: true,
+                validate: {
+                    len: [3, 100]
+                }
             }
         }, {
             sequelize: instancia,
-            modelName: 'RolModel',
-            tableName: 'roles',
+            modelName: 'CategoryModel',
+            tableName: 'categories',
             timestamps: false
         })
     }

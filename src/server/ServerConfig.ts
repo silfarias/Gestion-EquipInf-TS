@@ -4,7 +4,6 @@ import morgan from 'morgan';
 import { IServerConfig } from '../ts/interfaces/server.interface';
 import { envConfig } from '../config/environments';
 import { dbConfig } from '../database/dataBaseConfig';
-import { RolModel } from '../models/rols';
 
 export class ServerConfig implements IServerConfig {
 
