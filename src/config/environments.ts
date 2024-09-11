@@ -6,8 +6,8 @@ class EnvConfig {
     secretKey?: string
 
     constructor () {
-        this.port = process.env.PORT || '3000',
-        this.secretKey = process.env.SECRET_KEY
+        this.port = process.env.PORT || '3000';
+        this.secretKey = process.env.SECRET_KEY;
     }
 
     getEnvDataBase() {
