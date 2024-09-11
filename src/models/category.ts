@@ -1,10 +1,8 @@
-import { Model, DataTypes, Sequelize } from "sequelize";
+import { Model, DataTypes, Sequelize, InferAttributes, InferCreationAttributes } from "sequelize";
 
-export class CategoryModel extends Model {
+export class CategoryModel extends Model<InferAttributes<CategoryModel>, InferCreationAttributes<CategoryModel>> {
 
-    declare id: number;
     declare name: string;
-    declare description: string;
 
     static initModel(instancia: Sequelize) {
         CategoryModel.init({ 
@@ -13,13 +11,6 @@ export class CategoryModel extends Model {
                 allowNull: false,
                 validate: {
                     len: [3, 50]
-                }
-            }, 
-            description: {
-                type: DataTypes.STRING,
-                allowNull: true,
-                validate: {
-                    len: [3, 100]
                 }
             }
         }, {

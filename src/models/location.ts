@@ -1,20 +1,11 @@
-import { Model, DataTypes, Sequelize } from "sequelize";
+import { Model, DataTypes, Sequelize, InferAttributes, InferCreationAttributes } from "sequelize";
 
-export class LocationModel extends Model {
+export class LocationModel extends Model<InferAttributes<LocationModel>, InferCreationAttributes<LocationModel>> {
 
-    declare id: number;
-    declare name: string;
-    declare description: string;
+    declare address: string;
 
     static initModel(instancia: Sequelize) {
         LocationModel.init({
-            name: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                validate: {
-                    len: [3, 80]
-                }
-            }, 
             address: {
                 type: DataTypes.STRING,
                 allowNull: true

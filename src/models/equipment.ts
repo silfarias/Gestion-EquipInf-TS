@@ -1,7 +1,6 @@
-import { Model, DataTypes, Sequelize, ForeignKey } from "sequelize";
+import { Model, DataTypes, Sequelize, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
 
-export class EquipmentModel extends Model {
-    declare id: number;
+export class EquipmentModel extends Model<InferAttributes<EquipmentModel>, InferCreationAttributes<EquipmentModel>> {
     declare serial_number: number;
     declare description: string;
     declare model: string;
@@ -9,9 +8,9 @@ export class EquipmentModel extends Model {
     declare date_acquisition: string;
     declare state: string;
     declare stock_total: number;
-    declare location_id: ForeignKey<number>;
     declare category_id: ForeignKey<number>;
-    declare supplier_id?: ForeignKey<number>;
+    declare user_id: ForeignKey<number>;
+    declare location_id: ForeignKey<number>;
 
     static initModel(instancia: Sequelize) {
         EquipmentModel.init({
