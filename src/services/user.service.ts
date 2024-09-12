@@ -6,10 +6,10 @@ import { createJWT } from "../utils/jwt";
 
 export class UserService {
     // constructor () {}
+    
+    // registro
     // utilizamos infercreationattributes para crear un nuevo registro en la db con los tipos necesarios 
     // especificados en el modelo 
-
-    // registro
     async register(user: InferCreationAttributes<UserModel>): Promise<UserModel | void> {
         try {
             if (user.password) {
@@ -24,10 +24,10 @@ export class UserService {
     }
 
     // login
-    async login(email: string, password: string) {
+    async login(user_name: string, password: string) {
         try {
             const user = await UserModel.findOne({ 
-                where: { email: email },
+                where: { user_name: user_name },
                 include: ['RolModel']
             });
             if (!user) {
@@ -37,8 +37,8 @@ export class UserService {
             if (!isMatch) {
                 throw new Error('credenciales invalidas')
             }
-            const token = await createJWT({id: user.id, rol: user.rol_id})
-            return {...user.toJSON, token}
+            const token = await createJWT({ id: user.id, rol: user.rol_id })
+            return { message: 'Login correcto, bienvenido', user: { ...user.toJSON() }, token };
         } catch (error) {
             console.log('error al loguear usuario', error);
             throw error;

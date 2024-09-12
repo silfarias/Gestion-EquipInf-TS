@@ -2,7 +2,6 @@ import { Model, Sequelize } from "sequelize";
 import { UserModel } from "./user";
 import { RolModel } from "./rols";
 import { CategoryModel } from "./category";
-import { LocationModel } from "./location";
 import { EquipmentModel } from "./equipment";
 import { ClientsModel } from "./clients";
 import { PurchaseDetailsModel } from "./purchase_details";
@@ -16,7 +15,6 @@ export function defineRelations(sequelize: Sequelize) {
         UserModel, 
         RolModel, 
         CategoryModel, 
-        LocationModel, 
         EquipmentModel,                     
         ClientsModel,
         PurchaseDetailsModel
@@ -48,23 +46,7 @@ export function defineRelations(sequelize: Sequelize) {
     EquipmentModel.belongsTo(UserModel, {
         foreignKey: 'user_id',
     });
-
-    // ubicacion y equipamiento
-    LocationModel.hasMany(EquipmentModel, {
-        foreignKey: 'location_id',
-    });
-    EquipmentModel.belongsTo(LocationModel, {
-        foreignKey: 'location_id',
-    });
-
-    // clientes y ubicacion
-    LocationModel.hasOne(ClientsModel, {
-        foreignKey: 'id_location'
-    })
-    ClientsModel.belongsTo(LocationModel, {
-        foreignKey: 'id_location'
-    });
-
+    
     // cliente y facturas
     ClientsModel.hasMany(PurchaseDetailsModel, {
         foreignKey: 'id_client'

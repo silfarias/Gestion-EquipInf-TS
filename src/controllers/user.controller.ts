@@ -9,26 +9,29 @@ export class UserController {
         this.userService = new UserService();
     }
 
-    async register(req: Request, res: Response): Promise<Response> {
+    register = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const user = await this.userService.register(req.body);
+            const { rol_id } = req.params;
+            const userData = req.body;
+            userData.rol_id = Number(rol_id);
+            const user = await this.userService.register(userData);
             return res.status(201).json(user);
         } catch (error) {
             return handleControllerError(error, res); 
         }
     }
 
-    async login(req: Request, res: Response): Promise<Response> {
+    login = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const { email, password } = req.body;
-            const user = await this.userService.login(email, password);
+            const { user_name, password } = req.body;
+            const user = await this.userService.login(user_name, password);
             return res.status(200).json(user);
         } catch (error) {
             return handleControllerError(error, res);
         }
     }
 
-    async getAllUsers(req: Request, res: Response): Promise<Response> {
+    getAllUsers = async (req: Request, res: Response): Promise<Response> => {
         try {
             const users = await this.userService.getAllUsers();
             return res.status(200).json(users);
@@ -37,7 +40,7 @@ export class UserController {
         }
     }
 
-    async getUserById(req: Request, res: Response): Promise<Response> {
+    getUserById = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const user = await this.userService.getUserById(Number(id));
@@ -47,7 +50,7 @@ export class UserController {
         }
     }
 
-    async deleteUser(req: Request, res: Response): Promise<Response> {
+    deleteUser = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             await this.userService.deleteUser(Number(id));
@@ -57,7 +60,7 @@ export class UserController {
         }
     }
 
-    async updateUser(req: Request, res: Response): Promise<Response> {
+    updateUser = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const userUpdate = req.body;

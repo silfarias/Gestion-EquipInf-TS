@@ -1,4 +1,4 @@
-import { DataTypes, Model, InferAttributes, InferCreationAttributes, Sequelize, ForeignKey } from 'sequelize';
+import { DataTypes, Model, Sequelize, ForeignKey } from 'sequelize';
 
 export class ClientsModel extends Model {
 

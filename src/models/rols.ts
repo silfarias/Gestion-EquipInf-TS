@@ -19,5 +19,21 @@ export class RolModel extends Model<InferAttributes<RolModel>, InferCreationAttr
             tableName: 'roles',
             timestamps: false
         })
+        RolModel.afterSync(async () => {
+            const count = await RolModel.count();
+            if (count === 0) {
+                const roles = [
+                    { name: 'admin' },
+                    { name: 'employee' }
+                ];
+                await RolModel.bulkCreate(roles, {
+                    ignoreDuplicates: true
+                });
+                console.log('Roles iniciales insertados');
+            } else {
+                console.log('La tabla de roles ya tiene registros, no se insertaron nuevos roles.');
+            }
+        });
+        
     }
 }

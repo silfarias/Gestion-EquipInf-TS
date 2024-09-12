@@ -11,7 +11,6 @@ export const handleValidationErrors = (req: Request, res: Response, next: NextFu
                     msg: err.msg,
                 };
             } else {
-                // si el error no tiene la propiedad `param`, devolvemos un mensaje genérico o tratamos de otra manera
                 return {
                     msg: err.msg,
                 };

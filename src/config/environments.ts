@@ -3,11 +3,11 @@ import 'dotenv/config'
 class EnvConfig {
 
     port: string
-    secretKey?: string
+    secretKey: string
 
     constructor () {
         this.port = process.env.PORT || '3000';
-        this.secretKey = process.env.SECRET_KEY;
+        this.secretKey = process.env.SECRET_KEY || 'ññññññññ';
     }
 
     getEnvDataBase() {

@@ -1,4 +1,4 @@
-import { IDataBaseConfig } from '../ts/interfaces/db.interface'
+import { IDataBaseConfig } from '../interfaces/db.interface'
 import { Dialect, Sequelize } from 'sequelize';
 import { envConfig } from '../config/environments';
 import { defineRelations } from '../models/relations';

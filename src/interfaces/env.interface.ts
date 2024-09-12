@@ -1,6 +1,6 @@
 export interface IEnvConfig {
     port: string;
-    secretKey?: string;
+    secretKey: string;
     dbName: string;
     dbUser: string;
     dbPassword: string;
