@@ -19,7 +19,7 @@ export const authentication = (req: CustomRequest, res: Response, next: NextFunc
         if (err) {
             return res.status(401).json({ message: 'ha ocurrido un error en la autenticación' })
         }
-        req.user = decoded as JwtPayload;
+        req.user = decoded as JwtPayload & {rol_id: number};
         next();
     })
 }

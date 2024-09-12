@@ -1,6 +1,17 @@
-import { Request, Response, NextFunction } from "express";
-import { JwtPayload, JwtHeader } from "jsonwebtoken";
+import { Request, Response, NextFunction } from 'express';
 
-export const checkRole = (requireRolId: number) => {
-    
+interface CustomRequest extends Request {
+    user?: { rol_id: number };
 }
+
+export const checkRole = (requiredRoleId: number) => {
+    return (req: CustomRequest, res: Response, next: NextFunction) => {
+        const user = req.user;
+        console.log(req.user);
+        if (!user || user.rol_id !== requiredRoleId) {
+            console.log(user?.rol_id)
+            return res.status(403).json({ message: 'Acceso denegado: no tienes permisos suficientes' });
+        }
+        next();
+    };
+};

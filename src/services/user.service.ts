@@ -28,7 +28,7 @@ export class UserService {
         try {
             const user = await UserModel.findOne({ 
                 where: { user_name: user_name },
-                include: ['RolModel']
+                // include: ['RolModel']
             });
             if (!user) {
                 throw new Error('usuario no encontrado')
