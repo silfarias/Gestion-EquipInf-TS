@@ -1,6 +1,6 @@
 import { DataTypes, Model, InferAttributes, InferCreationAttributes, Sequelize, ForeignKey } from 'sequelize';
 
-export class ClientsModel extends Model<InferAttributes<ClientsModel>, InferCreationAttributes<ClientsModel>> {
+export class ClientsModel extends Model {
 
     declare name: string;
     declare contact: string;

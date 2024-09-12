@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import { IServerConfig } from '../ts/interfaces/server.interface';
 import { envConfig } from '../config/environments';
 import { dbConfig } from '../database/dataBaseConfig';
+import { router } from '../routes/index.routes';
 
 export class ServerConfig implements IServerConfig {
 
@@ -14,7 +15,7 @@ export class ServerConfig implements IServerConfig {
         this.app = express();
         this.port = envConfig.port;
         this.middlewares();
-        this.router();
+        this.routes();
     }
 
     middlewares(): void {
@@ -23,10 +24,8 @@ export class ServerConfig implements IServerConfig {
         this.app.use(express.json());
     }
 
-    router(): void {
-        this.app.get('/', (req, res) => {
-            res.send('Hello World!')
-        })
+    routes(): void {
+        this.app.use(router);
     }
 
     async listen(): Promise<void> {

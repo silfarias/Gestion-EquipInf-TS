@@ -1,6 +1,6 @@
 import { DataTypes, Model, InferAttributes, InferCreationAttributes, Sequelize, ForeignKey } from 'sequelize';
 
-export class PurchaseDetailsModel extends Model<InferAttributes<PurchaseDetailsModel>, InferCreationAttributes<PurchaseDetailsModel>> {
+export class PurchaseDetailsModel extends Model {
 
     declare quantity: number;
     declare total: number;

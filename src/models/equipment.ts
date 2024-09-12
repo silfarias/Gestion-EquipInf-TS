@@ -1,6 +1,6 @@
 import { Model, DataTypes, Sequelize, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
 
-export class EquipmentModel extends Model<InferAttributes<EquipmentModel>, InferCreationAttributes<EquipmentModel>> {
+export class EquipmentModel extends Model {
     declare serial_number: number;
     declare description: string;
     declare model: string;

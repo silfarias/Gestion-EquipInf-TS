@@ -1,6 +1,6 @@
 import { Model, DataTypes, Sequelize, InferAttributes, InferCreationAttributes } from "sequelize";
 
-export class LocationModel extends Model<InferAttributes<LocationModel>, InferCreationAttributes<LocationModel>> {
+export class LocationModel extends Model {
 
     declare address: string;
 

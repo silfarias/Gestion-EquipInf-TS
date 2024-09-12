@@ -1,7 +1,7 @@
 import { envConfig } from "../config/environments";
 import jwt, { JwtPayload, JsonWebTokenError } from "jsonwebtoken";
 
-export const crearJWT = (payload: JwtPayload): Promise<string> => {
+export const createJWT = (payload: JwtPayload): Promise<string> => {
     return new Promise((resolve, reject) => {
         if (!envConfig.secretKey) {
             return reject(new JsonWebTokenError('No hay una llave secreta'))
