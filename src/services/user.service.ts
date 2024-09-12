@@ -18,7 +18,7 @@ export class UserService {
             }
             return await UserModel.create(user);
         } catch (error) {
-            console.log('error al registrar usuario', error);
+            console.error('error al registrar usuario', error);
             throw error;
         }
     }
@@ -37,7 +37,7 @@ export class UserService {
             if (!isMatch) {
                 throw new Error('credenciales invalidas')
             }
-            const token = await createJWT({ id: user.id, rol: user.rol_id })
+            const token = await createJWT({ id: user.id, rol_id: user.rol_id })
             return { message: 'Login correcto, bienvenido', user: { ...user.toJSON() }, token };
         } catch (error) {
             console.log('error al loguear usuario', error);
@@ -73,7 +73,8 @@ export class UserService {
 
     async deleteUser(id: number) {
         try {
-            return await UserModel.destroy({ where: { id: id }})
+            await UserModel.destroy({ where: { id: id }})
+            return { message: 'usuario eliminado'}
         } catch (error) {
             console.log("error al borrar usuario:", error);
             throw error;
