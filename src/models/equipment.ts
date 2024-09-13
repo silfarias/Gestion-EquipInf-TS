@@ -2,7 +2,7 @@ import { Model, DataTypes, Sequelize, ForeignKey } from "sequelize";
 
 export class EquipmentModel extends Model {
     declare serial_number: number;
-    declare description: string;
+    declare description: string | null;
     declare model: string;
     declare mark: string;
     declare date_acquisition: string;

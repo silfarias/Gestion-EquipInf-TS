@@ -13,4 +13,5 @@ export const createJWT = (payload: JwtPayload): Promise<string> => {
                 resolve(token)
             }
         })
-    
+    })
+};
