@@ -1,8 +1,8 @@
 import { UserModel } from "../models/user";
 import { hashString } from "../utils/hash";
 import { InferCreationAttributes } from "sequelize";
-import bcrypt from 'bcrypt';
 import { createJWT } from "../utils/jwt";
+import bcrypt from 'bcrypt';
 
 export class UserService {
     // constructor () {}
