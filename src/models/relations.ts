@@ -1,10 +1,11 @@
-import { Model, Sequelize } from "sequelize";
+import { Sequelize } from "sequelize";
 import { UserModel } from "./user";
 import { RolModel } from "./rols";
 import { CategoryModel } from "./category";
 import { EquipmentModel } from "./equipment";
 import { ClientsModel } from "./clients";
 import { PurchaseDetailsModel } from "./purchase_details";
+import { InventoryModel } from "./inventory";
 
 type ModelWithInit = { initModel: (instancia: Sequelize) => void }
 
@@ -12,12 +13,13 @@ export function defineRelations(sequelize: Sequelize) {
 
     // inicializamos modelos
     let models: ModelWithInit[] = [
-        UserModel, 
         RolModel, 
+        UserModel, 
         CategoryModel, 
         EquipmentModel,                     
         ClientsModel,
-        PurchaseDetailsModel
+        PurchaseDetailsModel,
+        InventoryModel
     ];
     models.forEach((model) => model.initModel(sequelize));
 
@@ -46,20 +48,28 @@ export function defineRelations(sequelize: Sequelize) {
     EquipmentModel.belongsTo(UserModel, {
         foreignKey: 'user_id',
     });
+
+    // equipamiento e inventario
+    EquipmentModel.hasMany(InventoryModel, {
+        foreignKey: 'equipment_id'
+    });
+    InventoryModel.belongsTo(EquipmentModel, {
+        foreignKey: 'equipment_id'
+    });
     
     // cliente y facturas
     ClientsModel.hasMany(PurchaseDetailsModel, {
-        foreignKey: 'id_client'
+        foreignKey: 'client_id'
     });
     PurchaseDetailsModel.belongsTo(ClientsModel, {
-        foreignKey: 'id_client'
+        foreignKey: 'client_id'
     });
 
     // facturas y equipamiento
     EquipmentModel.hasMany(PurchaseDetailsModel, {
-        foreignKey: 'id_equipment'
+        foreignKey: 'equipment_id'
     });
     PurchaseDetailsModel.belongsTo(EquipmentModel, {
-        foreignKey: 'id_equipment'
+        foreignKey: 'equipment_id'
     });
 }

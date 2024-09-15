@@ -16,7 +16,7 @@ equipRoutes.post('/:category_id',
     checkRole(1), 
     equipCtrl.addEquipment
 );
-equipRoutes.get('/', authentication, equipCtrl.getAllEquipments);
+equipRoutes.get('/', handleValidationErrors, authentication, equipCtrl.getAllEquipments);
 equipRoutes.get('/:id', authentication, equipCtrl.getEquipById);
 equipRoutes.put('/:id', valiEquipSchema, handleValidationErrors, authentication, equipCtrl.updateEquip);
 equipRoutes.delete('/:id', authentication, checkRole(1), equipCtrl.deleteEquip);

@@ -3,8 +3,8 @@ import { DataTypes, Model, Sequelize, ForeignKey, INTEGER } from 'sequelize';
 export class ClientsModel extends Model {
 
     declare name: string;
-    declare contact: string;
-    declare id_location: ForeignKey<number>;
+    declare contact_phone: string;
+    declare address: string;
 
     static initModel(instacia: Sequelize) {
         ClientsModel.init({
@@ -12,10 +12,14 @@ export class ClientsModel extends Model {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            contact: {
+            contact_phone: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            address: {
+                type: DataTypes.STRING,
+                allowNull: false
+            }
         }, {
             sequelize: instacia,
             modelName: 'ClientsModel',

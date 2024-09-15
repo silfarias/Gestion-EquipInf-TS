@@ -23,7 +23,7 @@ export class DbConfig implements IDataBaseConfig {
 
     async connectDb(): Promise<void> {
         try {
-            await this.sequelize.sync({ force: false });
+            await this.sequelize.sync({ alter: true });
             console.log(`Base de datos conectada`);
         } catch (error) {
             console.error('No se ha podido conectar a la base de datos', error);

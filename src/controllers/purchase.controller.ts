@@ -11,13 +11,37 @@ export class PurchaseController {
 
     createPurchase = async (req: Request, res: Response) => {
         try {
-            const { id_equipment } = req.params;
-            const purchaseData = req.body;
-            purchaseData.id_equipment = Number(id_equipment);
+            const { equipment_id } = req.params;
+            const { client_id, quantity } = req.body;
+            const purchaseData = {
+                client_id: Number(client_id),
+                equipment_id: Number(equipment_id),
+                quantity: Number(quantity),
+                total: Number(quantity)
+            };
             const purchase = await this.purchaseService.createPurchase(purchaseData);
             return res.status(201).json(purchase);
         } catch (error) {
             return handleControllerError(error, res)
         }
     }
+
+    getAllPurchases = async (req: Request, res: Response): Promise<Response> => {
+        try {
+            const purchases = await this.purchaseService.getAllPurchases();
+            return res.status(200).json(purchases);
+        } catch (error) {
+            return handleControllerError(error, res);
+        }
+    };
+
+    getPurchaseById = async (req: Request, res: Response): Promise<Response> => {
+        try {
+            const { id } = req.params;
+            const purchase = await this.purchaseService.getPurchaseById(Number(id));
+            return res.status(200).json(purchase);
+        } catch (error) {
+            return handleControllerError(error, res);
+        }
+    };
 }

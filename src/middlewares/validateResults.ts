@@ -16,9 +16,7 @@ export const handleValidationErrors = (req: Request, res: Response, next: NextFu
                 };
             }
         });
-        return res.status(400).json({
-            errors: errorDetails,
-        });
+        return res.status(400).json({ errors: errorDetails });
     }
     next();
 };
