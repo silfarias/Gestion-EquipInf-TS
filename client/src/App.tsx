@@ -1,11 +1,11 @@
 import { Toaster } from 'sonner'
-import { FormLogin } from './components'
+import { AppRouter } from './routes/AppRouter'
 
 function App() {
 
   return (
     <>
-      <FormLogin/>
+      <AppRouter/>
       <Toaster position="bottom-right" />
     </>
   )

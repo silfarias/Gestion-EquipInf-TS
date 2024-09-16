@@ -1,5 +1,6 @@
 import { toast } from 'sonner';
 import { urlBack } from '../constants/urlBack';
+import { useNavigate } from 'react-router-dom';
 
 export type Inputs = {
     user_name: string,
@@ -7,7 +8,7 @@ export type Inputs = {
 };
 
 export const useFormLogin = () => {
-
+    const navigate = useNavigate();
     const onSubmit = async (data: Inputs) => {
         try {
             const response = await fetch(`${urlBack}/auth/login`, {
@@ -24,6 +25,9 @@ export const useFormLogin = () => {
             };
             toast.success(result.message);
             localStorage.setItem('token', result.token);
+            setTimeout(() => {
+                navigate('/storage');
+            }, 1500)
         } catch (error: any) {
             throw error
         }
