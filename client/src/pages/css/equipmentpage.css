@@ -1,0 +1,129 @@
+.contenedor-equips {
+    padding: 16px;
+}
+
+.navbar-equips {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background: linear-gradient(90deg, #7b2cbf, #9d4edd);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.navbar-equips h1 {
+    color: white;
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.navbar-equips button {
+    background-color: #f4a261;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar-equips button:hover {
+    background-color: #e76f51;
+    transform: scale(1.05);
+}
+
+.equips-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.equipment-card {
+    flex: 1 1 calc(25% - 32px);
+    max-width: 300px;
+    min-width: 250px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.equipment-card:hover {
+    transform: translateY(-5px);
+}
+
+.equipment-card-content {
+    padding: 16px;
+}
+
+.equipment-card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.equipment-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.equipment-card-mark {
+    font-size: 1rem;
+    color: #718096;
+}
+
+.equipment-card-stock {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.equipment-card-footer {
+    padding: 16px;
+}
+
+.toggle-details-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #7b2cbf;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.toggle-details-button:hover {
+    color: #5a189a;
+}
+
+.equipment-card-details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+}
+.equipment-card-details p {
+    color: #757575;
+}
+.equipment-card-details.expand {
+    max-height: 200px;
+    opacity: 1;
+}
+.equipment-card-details .equipment-options {
+    display: flex;
+    gap: 10px;
+}

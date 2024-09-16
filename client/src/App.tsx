@@ -1,5 +1,6 @@
-import { Toaster } from 'sonner'
-import { AppRouter } from './routes/AppRouter'
+import { Toaster } from 'sonner';
+import { AppRouter } from './routes/AppRouter';
+import './App.css';
 
 function App() {
 

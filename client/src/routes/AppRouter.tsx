@@ -7,6 +7,7 @@ export const AppRouter: React.FC = () => (
 		<Routes>
 			<Route path="/" element={<FormLogin />} />
 			<Route path="/storage" element={<EquipmentPage />} />
+			<Route path='/edit/:id' element={<FormLogin />} />
 		</Routes>
 	</BrowserRouter>
 );
