@@ -1,0 +1,75 @@
+.main-form-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 20px;
+    margin: 0 auto;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.main-form-login h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.form-login {
+    width: 100%;
+}
+
+.form-group-login {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-group-login label {
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-group-login input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group-login input:focus {
+    border-color: #5a189a;
+    box-shadow: 0 0 5px rgba(90, 24, 154, 0.5);
+}
+
+.submit-login {
+    width: 100%;
+    padding: 10px;
+    background-color: #5a189a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-login:hover {
+    background-color: #7b2cbf;
+}
+
+@media (max-width: 768px) {
+    .main-form-login {
+        padding: 20px 15px;
+    }
+}

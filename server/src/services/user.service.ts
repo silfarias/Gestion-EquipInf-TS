@@ -36,7 +36,7 @@ export class UserService {
                 throw new Error('credenciales invalidas')
             }
             const token = await createJWT({ id: user.id, rol_id: user.rol_id })
-            return { message: 'Login correcto, bienvenido', user: { ...user.toJSON() }, token };
+            return { message: 'Login correcto, ¡Bienvenido!', user: { ...user.toJSON() }, token };
         } catch (error) {
             console.log('error al loguear usuario', error);
             throw error;
