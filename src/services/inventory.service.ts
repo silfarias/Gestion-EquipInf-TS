@@ -3,7 +3,7 @@ import { InventoryModel } from '../models/inventory';
 import { EquipmentModel } from '../models/equipment';
 
 export class InventoryService {
-    async addToInventory(inventory: InferCreationAttributes<InventoryModel>): Promise<InventoryModel> {
+    public async addToInventory(inventory: InferCreationAttributes<InventoryModel>): Promise<InventoryModel> {
         try {
             const equipment = await EquipmentModel.findByPk(inventory.equipment_id);
             if (!equipment) {
@@ -16,7 +16,7 @@ export class InventoryService {
         }
     }
 
-    async updateInventory(id: number, inventoryUpdate: Partial<InferCreationAttributes<InventoryModel>>): Promise<InventoryModel> {
+    public async updateInventory(id: number, inventoryUpdate: Partial<InferCreationAttributes<InventoryModel>>): Promise<InventoryModel> {
         try {
             const inventory = await InventoryModel.findByPk(id);
             if (!inventory) {
@@ -29,7 +29,7 @@ export class InventoryService {
         }
     }
 
-    async getAllInventories(): Promise<InventoryModel[]> {
+    public async getAllInventories(): Promise<InventoryModel[]> {
         try {
             return await InventoryModel.findAll();
         } catch (error) {
@@ -38,7 +38,7 @@ export class InventoryService {
         }
     }
 
-    async getInventoryById(id: number): Promise<InventoryModel> {
+    public async getInventoryById(id: number): Promise<InventoryModel> {
         try {
             const inventory = await InventoryModel.findByPk(id);
             if (!inventory) {
@@ -51,7 +51,7 @@ export class InventoryService {
         }
     }
 
-    async deleteEquip(id: number): Promise<{ message: string }> {
+    public async deleteEquip(id: number): Promise<{ message: string }> {
         try {
             const result = await InventoryModel.destroy({ where: { id } });
             if (!result) {
@@ -63,4 +63,4 @@ export class InventoryService {
             throw error;
         }
     }
-}
+};

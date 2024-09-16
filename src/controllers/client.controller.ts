@@ -9,7 +9,7 @@ export class ClientController {
         this.clientService = new ClientService();
     }
 
-    registerClient = async (req: Request, res: Response): Promise<Response> => {
+    public registerClient = async (req: Request, res: Response): Promise<Response> => {
         try {
             const clientData = req.body;
             const newClient = await this.clientService.registerClient(clientData);
@@ -20,7 +20,7 @@ export class ClientController {
         }
     }
 
-    getAllClients = async (req: Request, res: Response): Promise<Response> => {
+    public getAllClients = async (req: Request, res: Response): Promise<Response> => {
         try {
             const clients = await this.clientService.getAllClients();
             return res.status(200).json(clients);
@@ -29,7 +29,7 @@ export class ClientController {
         }
     }
 
-    getClientById = async (req: Request, res: Response): Promise<Response> => {
+    public getClientById = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const client = await this.clientService.getClientById(Number(id));
@@ -39,7 +39,7 @@ export class ClientController {
         }
     }
 
-    deleteClient = async (req: Request, res: Response): Promise<Response> => {
+    public deleteClient = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const message = await this.clientService.deleteClient(Number(id));
@@ -49,7 +49,7 @@ export class ClientController {
         }
     }
 
-    updateClient = async (req: Request, res: Response): Promise<Response> => {
+    public updateClient = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const clientUpdate = req.body;

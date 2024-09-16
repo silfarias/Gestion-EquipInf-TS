@@ -19,7 +19,7 @@ export class ServerConfig implements IServerConfig {
         this.routes();
     }
 
-    middlewares(): void {
+    private middlewares(): void {
         this.app.use(cors());
         this.app.use(morgan('dev'));
         this.app.use(express.json());
@@ -27,11 +27,11 @@ export class ServerConfig implements IServerConfig {
         this.app.use(bodyParser.urlencoded({ extended: true }));
     }
 
-    routes(): void {
+    private routes(): void {
         this.app.use('/', router);
     }
 
-    async listen(): Promise<void> {
+    public async listen(): Promise<void> {
         try {
             await dbConfig.connectDb();
             this.app.listen(this.port, () => {

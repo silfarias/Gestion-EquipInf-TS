@@ -9,7 +9,7 @@ export class UserController {
         this.userService = new UserService();
     }
 
-    register = async (req: Request, res: Response): Promise<Response> => {
+    public register = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { rol_id } = req.params;
             const userData = req.body;
@@ -21,7 +21,7 @@ export class UserController {
         }
     }
 
-    login = async (req: Request, res: Response): Promise<Response> => {
+    public login = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { user_name, password } = req.body;
             const user = await this.userService.login(user_name, password);
@@ -31,7 +31,7 @@ export class UserController {
         }
     }
 
-    getAllUsers = async (req: Request, res: Response): Promise<Response> => {
+    public getAllUsers = async (req: Request, res: Response): Promise<Response> => {
         try {
             const users = await this.userService.getAllUsers();
             return res.status(200).json(users);
@@ -40,7 +40,7 @@ export class UserController {
         }
     }
 
-    getUserById = async (req: Request, res: Response): Promise<Response> => {
+    public getUserById = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const user = await this.userService.getUserById(Number(id));
@@ -50,7 +50,7 @@ export class UserController {
         }
     }
 
-    deleteUser = async (req: Request, res: Response): Promise<Response> => {
+    public deleteUser = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             await this.userService.deleteUser(Number(id));
@@ -60,7 +60,7 @@ export class UserController {
         }
     }
 
-    updateUser = async (req: Request, res: Response): Promise<Response> => {
+    public updateUser = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const userUpdate = req.body;

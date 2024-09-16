@@ -9,7 +9,7 @@ export class PurchaseController {
         this.purchaseService = new PurchaseService();
     }
 
-    createPurchase = async (req: Request, res: Response) => {
+    public createPurchase = async (req: Request, res: Response) => {
         try {
             const { equipment_id } = req.params;
             const { client_id, quantity } = req.body;
@@ -26,7 +26,7 @@ export class PurchaseController {
         }
     }
 
-    getAllPurchases = async (req: Request, res: Response): Promise<Response> => {
+    public getAllPurchases = async (req: Request, res: Response): Promise<Response> => {
         try {
             const purchases = await this.purchaseService.getAllPurchases();
             return res.status(200).json(purchases);
@@ -35,7 +35,7 @@ export class PurchaseController {
         }
     };
 
-    getPurchaseById = async (req: Request, res: Response): Promise<Response> => {
+    public getPurchaseById = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const purchase = await this.purchaseService.getPurchaseById(Number(id));

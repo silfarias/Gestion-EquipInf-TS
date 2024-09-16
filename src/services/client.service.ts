@@ -3,7 +3,7 @@ import { InferCreationAttributes } from "sequelize";
 
 
 export class ClientService {
-    async registerClient(client: InferCreationAttributes<ClientsModel>): Promise<ClientsModel | void> {
+    public async registerClient(client: InferCreationAttributes<ClientsModel>): Promise<ClientsModel | void> {
         try {
             return await ClientsModel.create(client)
         } catch (error) {
@@ -12,7 +12,7 @@ export class ClientService {
         }
     }
 
-    async getAllClients() {
+    public async getAllClients(): Promise<ClientsModel[] | void> {
         try {
             const clients = await ClientsModel.findAll();
             if (!clients || clients.length === 0) {
@@ -25,7 +25,7 @@ export class ClientService {
         }
     }
 
-    async getClientById(id: number) {
+    public async getClientById(id: number): Promise<ClientsModel | void> {
         try {
             const client = await ClientsModel.findByPk(id);
             if (!client) {
@@ -38,7 +38,7 @@ export class ClientService {
         }
     }
 
-    async deleteClient(id: number): Promise<{ message: string }> {
+    public async deleteClient(id: number): Promise<{ message: string }> {
         try {
             await ClientsModel.destroy({where: { id: id }})
             return { message: 'cliente eliminado del sistema'}
@@ -48,7 +48,7 @@ export class ClientService {
         }
     }
 
-    async updateClient(id: number, clientUpdate: Object) {
+    public async updateClient(id: number, clientUpdate: Object): Promise<ClientsModel | void> {
         try {
             const user = await ClientsModel.findByPk(id);
             if (!user) {
@@ -60,4 +60,4 @@ export class ClientService {
             throw error;
         }
     }
-}
+};

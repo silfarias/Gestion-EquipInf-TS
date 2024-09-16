@@ -8,7 +8,7 @@ export class InventoryController {
         this.inventoryService = new InventoryService();
     }
 
-    addToInventory = async (req: Request, res: Response): Promise<Response> => {
+    public addToInventory = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { equipment_id } = req.params;
             const inventoryData = req.body;
@@ -20,7 +20,7 @@ export class InventoryController {
         }
     }
 
-    getAllInventories = async (req: Request, res: Response): Promise<Response> => {
+    public getAllInventories = async (req: Request, res: Response): Promise<Response> => {
         try {
             const inventories = await this.inventoryService.getAllInventories();
             return res.status(200).json(inventories);
@@ -29,7 +29,7 @@ export class InventoryController {
         }
     }
 
-    getInventoryById = async (req: Request, res: Response): Promise<Response> => {
+    public getInventoryById = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const inventory = await this.inventoryService.getInventoryById(Number(id));
@@ -39,7 +39,7 @@ export class InventoryController {
         }
     }
 
-    updateInventory = async (req: Request, res: Response): Promise<Response> => {
+    public updateInventory = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const inventoryUpdate = req.body;
@@ -50,7 +50,7 @@ export class InventoryController {
         }
     }
 
-    deleteInventory = async (req: Request, res: Response): Promise<Response> => {
+    public deleteInventory = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const result = await this.inventoryService.deleteEquip(Number(id));

@@ -3,7 +3,7 @@ import { InferCreationAttributes } from "sequelize";
 
 export class EquipmentService {
 
-    async addEquipment(equip: InferCreationAttributes<EquipmentModel>, user_id: number): Promise<EquipmentModel | void> {
+    public async addEquipment(equip: InferCreationAttributes<EquipmentModel>, user_id: number): Promise<EquipmentModel | void> {
         try {
             equip.user_id = user_id;
             return await EquipmentModel.create(equip);
@@ -13,7 +13,7 @@ export class EquipmentService {
         }
     }
 
-    async getAllEquipments(): Promise<EquipmentModel[] | void> {
+    public async getAllEquipments(): Promise<EquipmentModel[] | void> {
         try {
             return await EquipmentModel.findAll();
         } catch (error) {
@@ -22,7 +22,7 @@ export class EquipmentService {
         }
     }
 
-    async getEquipById(id: number) {
+    public async getEquipById(id: number): Promise<EquipmentModel> {
         try {
             const equip = await EquipmentModel.findByPk(id);
             if (!equip) {
@@ -35,7 +35,7 @@ export class EquipmentService {
         }
     }
 
-    async deleteEquip(id: number) {
+    public async deleteEquip(id: number): Promise<{ message: string }> {
         try {
             const result = await EquipmentModel.destroy({ where: { id } });
             if (!result) {
@@ -48,7 +48,7 @@ export class EquipmentService {
         }
     }
 
-    async updateEquip(id: number, equipUpdate: Object) {
+    public async updateEquip(id: number, equipUpdate: Object): Promise<EquipmentModel | void> {
         try {
             const user = await EquipmentModel.findByPk(id);
             if (!user) {
@@ -60,4 +60,4 @@ export class EquipmentService {
             throw error;
         }
     }
-}
+};

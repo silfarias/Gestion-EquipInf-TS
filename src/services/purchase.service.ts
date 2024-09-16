@@ -5,7 +5,7 @@ import { ClientsModel } from "../models/clients";
 
 
 export class PurchaseService {
-    async createPurchase(purchase: InferCreationAttributes<PurchaseDetailsModel>): Promise<PurchaseDetailsModel | void> {
+    public async createPurchase(purchase: InferCreationAttributes<PurchaseDetailsModel>): Promise<PurchaseDetailsModel | void> {
         const { client_id, equipment_id, quantity } = purchase;
         try {
             const client = await ClientsModel.findByPk(client_id);
@@ -33,7 +33,7 @@ export class PurchaseService {
         }
     }
 
-    async getAllPurchases(): Promise<PurchaseDetailsModel[] | void> {
+    public async getAllPurchases(): Promise<PurchaseDetailsModel[] | void> {
         try {
             return await PurchaseDetailsModel.findAll();
         } catch (error) {
@@ -42,7 +42,7 @@ export class PurchaseService {
         }
     }
 
-    async getPurchaseById(id: number) {
+    public async getPurchaseById(id: number): Promise<PurchaseDetailsModel> {
         try {
             const purchase = await PurchaseDetailsModel.findByPk(id);
             if (!purchase) {
@@ -54,4 +54,4 @@ export class PurchaseService {
             throw error;
         }
     }
-}
+};

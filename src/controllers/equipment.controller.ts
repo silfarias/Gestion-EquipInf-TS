@@ -13,7 +13,7 @@ export class EquipmentController {
         this.equipmentService = new EquipmentService();
     }
 
-    addEquipment = async (req: CustomRequest, res: Response): Promise<Response> => {
+    public addEquipment = async (req: CustomRequest, res: Response): Promise<Response> => {
         try {
             const { category_id } = req.params;
             const equipData = req.body
@@ -28,7 +28,7 @@ export class EquipmentController {
         }
     }
 
-    getAllEquipments = async (req: Request, res: Response): Promise<Response> => {
+    public getAllEquipments = async (req: Request, res: Response): Promise<Response> => {
         try {
             const equipments = await this.equipmentService.getAllEquipments();
             return res.status(200).json(equipments);
@@ -37,7 +37,7 @@ export class EquipmentController {
         }
     };
 
-    getEquipById = async (req: Request, res: Response): Promise<Response> => {
+    public getEquipById = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const equip = await this.equipmentService.getEquipById(Number(id));
@@ -47,7 +47,7 @@ export class EquipmentController {
         }
     };
 
-    updateEquip = async (req: Request, res: Response): Promise<Response> => {
+    public updateEquip = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const equipData = req.body;
@@ -58,7 +58,7 @@ export class EquipmentController {
         }
     };
 
-    deleteEquip = async (req: Request, res: Response): Promise<Response> => {
+    public deleteEquip = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
             const result = await this.equipmentService.deleteEquip(Number(id));

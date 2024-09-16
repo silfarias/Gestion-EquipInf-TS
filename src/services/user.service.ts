@@ -5,12 +5,10 @@ import { createJWT } from "../utils/jwt";
 import bcrypt from 'bcrypt';
 
 export class UserService {
-    // constructor () {}
-    
     // registro
     // utilizamos infercreationattributes para crear un nuevo registro en la db con los tipos necesarios 
     // especificados en el modelo 
-    async register(user: InferCreationAttributes<UserModel>): Promise<UserModel | void> {
+    public async register(user: InferCreationAttributes<UserModel>): Promise<UserModel | void> {
         try {
             if (user.password) {
                 const hashPassword = await hashString(user.password);
@@ -24,12 +22,12 @@ export class UserService {
     }
 
     // login
-    async login(user_name: string, password: string) {
+    public async login(user_name: string, password: string): Promise<{ message: string, user: Object, token: string } | void> {
         try {
             const user = await UserModel.findOne({ 
                 where: { user_name: user_name },
-                // include: ['RolModel']
             });
+            // console.log(user)
             if (!user) {
                 throw new Error('usuario no encontrado')
             }
@@ -45,7 +43,7 @@ export class UserService {
         }
     }
 
-    async getAllUsers() {
+    public async getAllUsers(): Promise<UserModel[] | void> {
         try {
             const users = await UserModel.findAll();
             if (!users || users.length === 0) {
@@ -58,7 +56,7 @@ export class UserService {
         }
     }
 
-    async getUserById(id: number) {
+    public async getUserById(id: number): Promise<UserModel | void> {
         try {
             const user = await UserModel.findByPk(id);
             if (!user) {
@@ -71,7 +69,7 @@ export class UserService {
         }
     }
 
-    async deleteUser(id: number) {
+    public async deleteUser(id: number): Promise<{ message: string }> {
         try {
             await UserModel.destroy({ where: { id: id }})
             return { message: 'usuario eliminado'}
@@ -81,7 +79,7 @@ export class UserService {
         }
     }
 
-    async updateUser(id: number, userUpdate: Object) {
+    public async updateUser(id: number, userUpdate: Object): Promise<UserModel | void> {
         try {
             const user = await UserModel.findByPk(id);
             if (!user) {
@@ -93,4 +91,4 @@ export class UserService {
             throw error;
         }
     }
-}
+};
