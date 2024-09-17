@@ -2,7 +2,7 @@ import { useLogout } from '../hooks/useLogout';
 import { FiSearch, FiLogOut } from 'react-icons/fi'
 import './css/header.css';
 
-export default function Header() {
+export function Header() {
     const { handleLogout } = useLogout();
 
     return (

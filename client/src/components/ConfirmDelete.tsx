@@ -1,58 +1,58 @@
-import { IoClose } from "react-icons/io5";
-import { useDeleteEquip } from "../hooks/useDeleteEquip";
+// import { IoClose } from "react-icons/io5";
+// import { useDeleteEquip } from "../hooks/useDeleteEquip";
 
-interface ModalConfirmDeleteProps {
-    onClose: () => void;
-    onConfirm: (id: number) => void;
-    equip: { id: number, model: string };
-}
+// interface ModalConfirmDeleteProps {
+//     onClose: () => void;
+//     onConfirm: (id: number) => void;
+//     equip: { id: number, model: string };
+// }
 
-export const ConfirmDelete: React.FC<ModalConfirmDeleteProps> = ({ onClose, onConfirm, equip }) => {
-    const { deleteEquip } = useDeleteEquip();
+// export const ConfirmDelete: React.FC<ModalConfirmDeleteProps> = ({ onClose, onConfirm, equip }) => {
+//     const { deleteEquip } = useDeleteEquip();
 
-    const handleEliminarEquip = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        try {
-            const isDeleted = await deleteEquip(equip.id);
-            if (isDeleted) {
-                onConfirm(equip.id); // función para actualizar la lista de equipos
-            }
-            onClose();
-        } catch (error) {
-            console.error('Error al eliminar el equipo:', error);
-        }
-    };
+//     const handleEliminarEquip = async (e: React.FormEvent<HTMLFormElement>) => {
+//         e.preventDefault();
+//         try {
+//             const isDeleted = await deleteEquip(equip.id);
+//             if (isDeleted) {
+//                 onConfirm(equip.id); // función para actualizar la lista de equipos
+//             }
+//             onClose();
+//         } catch (error) {
+//             console.error('Error al eliminar el equipo:', error);
+//         }
+//     };
 
-    return (
-        <div className="modal-overlay">
-            <div className="modal-content">
-                <div className="modal-header">
-                    <IoClose className="close-button" onClick={onClose} />
-                </div>
-                <form className="form" onSubmit={handleEliminarEquip}>
-                    <div className="form-group">
-                        <h3>
-                            ¿Estás seguro que deseas eliminar el equipo&nbsp;
-                            <strong>"{equip.model}"</strong>?
-                        </h3>
-                    </div>
-                    <div className="buttons-confirm">
-                        <button
-                            type="button"
-                            className="cancel-button"
-                            onClick={onClose}
-                        >
-                            Cancelar
-                        </button>
-                        <button
-                            type="submit"
-                            className="confirm-button"
-                        >
-                            Confirmar
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    );
-};
+//     return (
+//         <div className="modal-overlay">
+//             <div className="modal-content">
+//                 <div className="modal-header">
+//                     <IoClose className="close-button" onClick={onClose} />
+//                 </div>
+//                 <form className="form" onSubmit={handleEliminarEquip}>
+//                     <div className="form-group">
+//                         <h3>
+//                             ¿Estás seguro que deseas eliminar el equipo&nbsp;
+//                             <strong>"{equip.model}"</strong>?
+//                         </h3>
+//                     </div>
+//                     <div className="buttons-confirm">
+//                         <button
+//                             type="button"
+//                             className="cancel-button"
+//                             onClick={onClose}
+//                         >
+//                             Cancelar
+//                         </button>
+//                         <button
+//                             type="submit"
+//                             className="confirm-button"
+//                         >
+//                             Confirmar
+//                         </button>
+//                     </div>
+//                 </form>
+//             </div>
+//         </div>
+//     );
+// };

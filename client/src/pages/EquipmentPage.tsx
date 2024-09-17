@@ -1,5 +1,5 @@
-import Header from '../components/Header';
 import { useState } from 'react';
+import { Header } from '../components';
 import { FormEquip } from '../components';
 import { CardEquip } from '../components/CardEquip';
 import './css/equipmentpage.css';
@@ -9,7 +9,6 @@ export const EquipmentPage = () => {
 
     const openEquipModal = () => setIsModalOpen(true);
     const closeEquipModal = () => setIsModalOpen(false);
-
 
     return (
         <>

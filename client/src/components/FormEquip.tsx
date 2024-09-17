@@ -5,7 +5,7 @@ import { Inputs } from "../types/input.types";
 import './css/formequip.css';
 
 export const FormEquip: React.FC<FormEquipModalProps> = ({ isOpen, onClose }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+    const { register, handleSubmit } = useForm<Inputs>();
     const { onSubmit } = useRegisterEquip();
 
     const submitForm: SubmitHandler<Inputs> = (data) => {
@@ -20,6 +20,7 @@ export const FormEquip: React.FC<FormEquipModalProps> = ({ isOpen, onClose }) =>
 
                 <form onSubmit={handleSubmit(submitForm)} className="equipment-form">
                     <div className="grid-container">
+                        
                         <div className="caja-inputs">
                             <label htmlFor="category_id">Categoría</label>
                             <select {...register("category_id", { required: true })} id="category_id">
@@ -35,44 +36,37 @@ export const FormEquip: React.FC<FormEquipModalProps> = ({ isOpen, onClose }) =>
                                 <option value="9">Almacenamiento Externo</option>
                                 <option value="10">PC</option>
                             </select>
-                            {errors.category_id && <span>Campo obligatorio</span>}
                         </div>
 
                         <div className="caja-inputs">
                             <label htmlFor="mark">Marca</label>
                             <input {...register("mark", { required: true })} id="mark" />
-                            {errors.mark && <span>Campo obligatorio</span>}
                         </div>
 
                         <div className="caja-inputs">
                             <label htmlFor="model">Modelo</label>
                             <input {...register("model", { required: true })} id="model" />
-                            {errors.model && <span>Campo obligatorio</span>}
                         </div>
 
                         <div className="caja-inputs">
                             <label htmlFor="date_acquisition">Fecha de Adquisición</label>
                             <input type="date" {...register("date_acquisition", { required: true })} id="date_acquisition" />
-                            {errors.date_acquisition && <span>Campo obligatorio</span>}
                         </div>
 
                         <div className="caja-inputs">
                             <label htmlFor="state">Estado</label>
                             <input {...register("state", { required: true })} id="state" />
-                            {errors.state && <span>Campo obligatorio</span>}
                         </div>
 
                         <div className="caja-inputs">
                             <label htmlFor="stock">Stock</label>
                             <input {...register("stock", { required: true })} id="stock" type="number" />
-                            {errors.state && <span>Campo obligatorio</span>}
                         </div>
 
 
                         <div className="caja-inputs">
                             <label htmlFor="unit_price">Precio unitario</label>
                             <input {...register("unit_price", { required: true })} id="unit_price" />
-                            {errors.state && <span>Campo obligatorio</span>}
                         </div>
 
                         <div className="caja-inputs">

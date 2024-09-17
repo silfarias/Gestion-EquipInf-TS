@@ -1,0 +1,101 @@
+.contenedor-todo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.container-edit {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    margin: 20px;
+    box-sizing: border-box;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.equipment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.caja-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.caja-inputs label {
+    font-weight: 500;
+    color: #555;
+    font-size: 0.85rem;
+}
+
+.caja-inputs input,
+.caja-inputs select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.caja-inputs input:focus,
+.caja-inputs select:focus {
+    border-color: #7b2cbf;
+    outline: none;
+}
+
+.caja-inputs input[type="date"] {
+    font-size: 0.9rem;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.cancel-button,
+.save-button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button {
+    background-color: #e76f51;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #d9534f;
+}
+
+.save-button {
+    background-color: #7b2cbf;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #5a189a;
+}
