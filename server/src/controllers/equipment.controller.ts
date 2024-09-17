@@ -50,18 +50,15 @@ export class EquipmentController {
     public updateEquip = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
-            const { location, unit_price, stock, ...equipUpdate } = req.body;
-    
+            const { inventory, ...equipUpdate } = req.body;
             const updatedEquip = await this.equipmentService.updateEquip(
-                Number(id), 
-                equipUpdate, 
-                location, 
-                unit_price, 
-                stock
+                Number(id),
+                equipUpdate,
+                inventory
             );
             return res.status(200).json({
                 message: 'Equipo e inventario actualizados correctamente',
-                equip: updatedEquip, location, unit_price, stock
+                equip: updatedEquip
             });
         } catch (error) {
             console.error('Error al actualizar equipo e inventario:', error);
@@ -69,7 +66,7 @@ export class EquipmentController {
                 message: 'Error al actualizar equipo e inventario',
                 error: error
             });
-        }
+        };
     };
     
     public deleteEquip = async (req: Request, res: Response): Promise<Response> => {

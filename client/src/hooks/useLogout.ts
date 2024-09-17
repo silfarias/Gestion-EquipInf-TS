@@ -1,24 +1,31 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { token } from "../constants/authentication";
+import { AuthContext } from "../context/AuthContext";
 import { LogoutProps } from "../types/props.types";
 
 export const useLogout = (): LogoutProps => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const authContext = useContext(AuthContext);
+    if (!authContext) throw new Error("useLogout must be used within an AuthProvider");
+    const { logoutUser, userState } = authContext;
+
     useEffect(() => {
-        if (token) {
-            setIsLoggedIn(true)
+        if (userState.isLogged) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
         }
-    }, []);
+    }, [userState.isLogged]);
+
     const handleLogout = (): void => {
-        setIsLoggedIn(false);
+        logoutUser();
         localStorage.removeItem('token');
-        toast.success('Sesión cerrada, !Hasta luego!');
+        toast.success('Sesión cerrada, ¡Hasta luego!');
         setTimeout(() => {
-            navigate('/')
+            navigate('/');
         }, 1500);
     };
-    return { isLoggedIn, handleLogout }
+    return { isLoggedIn, handleLogout };
 };

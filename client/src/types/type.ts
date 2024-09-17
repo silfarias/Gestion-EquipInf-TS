@@ -1,4 +1,4 @@
-export const type: Object = {
+export const type = {
     LOGIN: 'LOGIN',
     LOGOUT: 'LOGOUT',
 };

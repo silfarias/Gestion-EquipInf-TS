@@ -29,7 +29,7 @@ export class EquipmentService {
                 include: [{ 
                     model: InventoryModel,
                     as: 'inventory',
-                    attributes: ['location', 'unit_price', 'stock']
+                    attributes: ['id','location', 'unit_price', 'stock']
                 }],
             });
             if (!equip) throw new Error('equipo informático no encontrado')
@@ -58,16 +58,14 @@ export class EquipmentService {
         }
     }
 
-    public async updateEquip(id: number, equipUpdate: Partial<EquipmentModel>, location: string, unit_price: number, stock: number): Promise<EquipmentModel | void> {
+    public async updateEquip(id: number, equipUpdate: Partial<EquipmentModel>, inventoryData: Partial<InventoryModel>): Promise<EquipmentModel | void> {
         try {
             const equip = await EquipmentModel.findByPk(id);
-            if (!equip) throw new Error('equipo informático no encontrado')
-            await equip.update(equipUpdate)
-            const inventories = await InventoryModel.findAll({ where: { equipment_id: id } });
-            if (inventories.length > 0) {
-                for (const inventory of inventories) {
-                    await inventory.update({ location, unit_price, stock });
-                }
+            if (!equip) throw new Error('equipo informático no encontrado');
+            await equip.update(equipUpdate);
+            const inventory = await InventoryModel.findOne({ where: { equipment_id: id } });
+            if (inventory) {
+                await inventory.update(inventoryData);
             }
             return equip;
         } catch (error) {

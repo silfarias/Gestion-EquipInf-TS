@@ -2,9 +2,15 @@ import { toast } from 'sonner';
 import { urlBack } from '../constants/urlBack';
 import { useNavigate } from 'react-router-dom';
 import { InputsLogin } from '../types/input.types';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 export const useFormLogin = () => {
     const navigate = useNavigate();
+    const authContext = useContext(AuthContext);
+    if (!authContext) throw new Error('No hay contexto de autenticación');
+    const { loginUser } = authContext;
+
     const onSubmit = async (data: InputsLogin) => {
         try {
             const response = await fetch(`${urlBack}/auth/login`, {
@@ -21,12 +27,17 @@ export const useFormLogin = () => {
             };
             toast.success(result.message);
             localStorage.setItem('token', result.token);
+            loginUser({
+                isLogged: true,
+                token: result.token,
+                user: result.user,
+            });
             setTimeout(() => {
                 navigate('/storage');
             }, 1500)
-        } catch (error: any) {
+        } catch (error) {
             throw error
         }
     }
     return { onSubmit }
-}
+};

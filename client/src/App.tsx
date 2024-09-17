@@ -1,13 +1,16 @@
 import { Toaster } from 'sonner';
 import { AppRouter } from './routes/AppRouter';
 import './App.css';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
 
   return (
     <>
-      <AppRouter/>
-      <Toaster position="bottom-right" />
+      <AuthProvider>
+        <AppRouter />
+        <Toaster position="bottom-right" />
+      </AuthProvider>
     </>
   )
 }

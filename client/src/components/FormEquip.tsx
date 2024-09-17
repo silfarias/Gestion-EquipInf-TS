@@ -4,7 +4,7 @@ import { FormEquipModalProps } from "../interfaces/props.interface";
 import { Inputs } from "../types/input.types";
 import './css/formequip.css';
 
-export const FormEquip: React.FC<FormEquipModalProps> = ({ isOpen, onClose }) => {
+export const FormEquip = ({ isOpen, onClose }: FormEquipModalProps) => {
     const { register, handleSubmit } = useForm<Inputs>();
     const { onSubmit } = useRegisterEquip();
 

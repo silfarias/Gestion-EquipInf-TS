@@ -1,27 +1,35 @@
 import { useForm } from "react-hook-form";
 import { useEditEquip } from "../hooks/useEditEquip";
-import { Inputs } from "../types/input.types";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { InputsUpd } from "../types/input.types";
 import './css/formeditequip.css'
 
 export const FormEditEquip = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { register, handleSubmit, setValue } = useForm<Inputs>();
+    const { register, handleSubmit, setValue } = useForm<InputsUpd>();
     const { equipmentData, updateEquip } = useEditEquip(Number(id));
 
     useEffect(() => {
         if (equipmentData) {
             Object.keys(equipmentData).forEach((key) => {
-                setValue(key as keyof Inputs, equipmentData[key as keyof Inputs]);
+                if (key !== 'inventory') {
+                    setValue(key as keyof InputsUpd, equipmentData[key as keyof InputsUpd]);
+                }
             });
+            if (equipmentData.inventory) {
+                setValue('inventory.location', equipmentData.inventory.location);
+                setValue('inventory.unit_price', equipmentData.inventory.unit_price);
+                setValue('inventory.stock', equipmentData.inventory.stock);
+            }
         }
     }, [equipmentData, setValue]);
 
-    const submitHandler = (data: Inputs) => {
+    const submitHandler = (data: InputsUpd) => {
         updateEquip(data);
     };
+    
     return (
         <>
             <div className="contenedor-todo">
@@ -70,17 +78,17 @@ export const FormEditEquip = () => {
 
                             <div className="caja-inputs">
                                 <label htmlFor="location">Ubicación</label>
-                                <input {...register('location')} placeholder="Ubicación" />
+                                <input {...register('inventory.location')} placeholder="Ubicación" />
                             </div>
 
                             <div className="caja-inputs">
                                 <label htmlFor="Precio unitario">Precio Unitario</label>
-                                <input {...register('unit_price')} type="number" placeholder="Precio Unitario" />
+                                <input {...register('inventory.unit_price')} type="number" placeholder="Precio Unitario" />
                             </div>
 
                             <div className="caja-inputs">
                                 <label htmlFor="stock">Stock</label>
-                                <input {...register('stock')} type="number" placeholder="Stock" />
+                                <input {...register('inventory.stock')} type="number" placeholder="Stock" />
                             </div>
 
                             <div className="caja-inputs">

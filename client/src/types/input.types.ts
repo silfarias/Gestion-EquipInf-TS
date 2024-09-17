@@ -15,18 +15,18 @@ export type Inputs = {
     stock: number;
 };
 
-export type InputsUpdate = {
+export type InputsUpd = {
+    id: number;
     model: string;
     mark: string;
     description: string | null;
     date_acquisition: string;
     state: string;
     category_id: number;
-    inventory: InventoryUpdate;
-}
-
-export type InventoryUpdate = {
-    location: string;
-    unit_price: number;
-    stock: number;
-}
+    user_id: number;
+    inventory: {
+        location: string;
+        unit_price: number;
+        stock: number;
+    };
+};

@@ -1,18 +1,19 @@
 import { toast } from 'sonner';
 import { urlBack } from '../constants/urlBack';
 import { useNavigate } from 'react-router-dom';
-import { Inputs } from '../types/input.types';
+import { InputsUpd } from '../types/input.types';
 import { token } from '../constants/authentication';
 import { useEffect, useState } from 'react';
 
 export const useEditEquip = (id: number) => {
     const navigate = useNavigate();
-    const [equipmentData, setEquipmentData] = useState<Inputs | null>(null);
+    const [equipmentData, setEquipmentData] = useState<InputsUpd | null>(null);
 
     useEffect(() => {
         const fetchEquip = async () => {
             try {
                 const response = await fetch(`${urlBack}/equip/${id}`, {
+                    method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
@@ -29,7 +30,7 @@ export const useEditEquip = (id: number) => {
         fetchEquip();
     }, [id]);
 
-    const updateEquip = async (data: Inputs) => {
+    const updateEquip = async (data: InputsUpd) => {
         try {
             const response = await fetch(`${urlBack}/equip/${id}`, {
                 method: 'PUT',
