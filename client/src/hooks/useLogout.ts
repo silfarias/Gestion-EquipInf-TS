@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner";
+import { token } from "../constants/authentication";
+import { LogoutProps } from "../types/props.types";
 
-export const useLogout = (): { isLoggedIn: boolean, handleLogout: () => void } => {
+export const useLogout = (): LogoutProps => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     useEffect(() => {
-        const token: string | null = localStorage.getItem('token');
         if (token) {
             setIsLoggedIn(true)
         }

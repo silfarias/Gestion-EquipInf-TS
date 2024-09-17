@@ -1,4 +1,4 @@
 export * from './FormLogin'
 export * from './Header'
-export * from './FormEquipModal'
-export * from './ModalConfirmDelete'
+export * from './FormEquip'
+export * from './ConfirmDelete'

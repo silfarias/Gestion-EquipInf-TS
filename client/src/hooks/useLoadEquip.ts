@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { urlBack } from "../constants/urlBack";
-import { Equipment } from "../interfaces/reqres.interface";
+import { Inventory } from "../interfaces/reqres.interface";
+import { token } from "../constants/authentication";
 
-export const useLoadEquip = (): { equips: Equipment[] } => {
-    const [equips, setEquips] = useState<Equipment[]>([]);
-
-    const token = localStorage.getItem('token');
-
+export const useLoadEquip = (): { equips: Inventory[] } => {
+    const [equips, setEquips] = useState<Inventory[]>([]);
     useEffect(() => {
         const fetchEquipments = async () => {
             try {
-                const response = await fetch(`${urlBack}/equip`, {
+                const response = await fetch(`${urlBack}/inventory`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -18,12 +16,12 @@ export const useLoadEquip = (): { equips: Equipment[] } => {
                     }
                 });
                 if (!response.ok) {
-                    throw new Error('Error al obtener los equipos');
+                    throw new Error('Error al obtener los equipos y sus inventarios');
                 }
-                const data = await response.json();
+                const data: Inventory[] = await response.json();
                 setEquips(data);
             } catch (error) {
-                throw error;
+                console.error(error);
             }
         };
         if (token) {

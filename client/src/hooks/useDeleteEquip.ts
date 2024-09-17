@@ -4,7 +4,7 @@ import { urlBack } from "../constants/urlBack";
 
 export const useDeleteEquip = () => {
     const deleteEquip = async (id: number) => {
-        const response = await fetch(`${urlBack}/equip/${id}`, {
+        const response = await fetch(`${urlBack}/inventory/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -12,10 +12,10 @@ export const useDeleteEquip = () => {
             },
         });
         if (!response.ok) {
-            toast.error('Error al borrar equipo');
-            throw new Error('Error al borrar equipo');
+            toast.error('Error al borrar equipo e inventario');
+            throw new Error('Error al borrar equipo e inventario');
         } else {
-            toast.success('Equipo eliminado');
+            toast.success('Equipo e inventario eliminado');
             return response.json();
         }
     };

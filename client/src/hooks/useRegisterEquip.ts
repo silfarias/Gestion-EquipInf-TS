@@ -1,21 +1,12 @@
 import { toast } from 'sonner';
 import { urlBack } from '../constants/urlBack';
-
-export type Inputs = {
-    model: string;
-    mark: string;
-    description: string | null;
-    date_acquisition: string;
-    state: string;
-    category_id: number;
-};
+import { Inputs } from '../types/input.types';
+import { token } from '../constants/authentication';
 
 export const useRegisterEquip = () => {
-    const token = localStorage.getItem('token');
-
     const onSubmit = async (data: Inputs) => {
         try {
-            const response = await fetch(`${urlBack}/equip/${data.category_id}`, {
+            const equipmentResponse = await fetch(`${urlBack}/equip/${data.category_id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -24,11 +15,33 @@ export const useRegisterEquip = () => {
                 body: JSON.stringify(data)
             });
 
-            const result = await response.json();
-            if (!response.ok) {
-                throw new Error(result.message || 'Error al registrar el equipo');
+            const equipmentResult = await equipmentResponse.json();
+            if (!equipmentResponse.ok) {
+                throw new Error(equipmentResult.message || 'Error al registrar el equipo');
             }
-            toast.success('Equipo registrado exitosamente');
+            const equipment_id = equipmentResult.id;
+
+            const inventoryData = {
+                equipment_id,
+                location: data.location,
+                unit_price: data.unit_price,
+                stock: data.stock,
+            };
+
+            const inventoryResponse = await fetch(`${urlBack}/inventory/${equipment_id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(inventoryData)
+            });
+
+            const inventoryResult = await inventoryResponse.json();
+            if (!inventoryResponse.ok) {
+                throw new Error(inventoryResult.message || 'Error al añadir al inventario');
+            }
+            toast.success('Equipo registrado y añadido al inventario exitosamente');
         } catch (error: any) {
             toast.error('Error al registrar el equipo');
             console.error('Error:', error);

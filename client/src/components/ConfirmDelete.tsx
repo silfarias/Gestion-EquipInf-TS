@@ -1,14 +1,13 @@
 import { IoClose } from "react-icons/io5";
 import { useDeleteEquip } from "../hooks/useDeleteEquip";
-import './css/deleteformequip.css';
 
 interface ModalConfirmDeleteProps {
     onClose: () => void;
     onConfirm: (id: number) => void;
-    equip: { id: number; model: string };
+    equip: { id: number, model: string };
 }
 
-export const ModalConfirmDelete: React.FC<ModalConfirmDeleteProps> = ({ onClose, onConfirm, equip }) => {
+export const ConfirmDelete: React.FC<ModalConfirmDeleteProps> = ({ onClose, onConfirm, equip }) => {
     const { deleteEquip } = useDeleteEquip();
 
     const handleEliminarEquip = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +15,7 @@ export const ModalConfirmDelete: React.FC<ModalConfirmDeleteProps> = ({ onClose,
         try {
             const isDeleted = await deleteEquip(equip.id);
             if (isDeleted) {
-                onConfirm(equip.id);
+                onConfirm(equip.id); // función para actualizar la lista de equipos
             }
             onClose();
         } catch (error) {

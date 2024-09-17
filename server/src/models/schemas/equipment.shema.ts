@@ -1,10 +1,6 @@
-import { body, param, ValidationChain } from 'express-validator';
+import { body, ValidationChain } from 'express-validator';
 
 export const valiEquipSchema: ValidationChain[] = [
-    param('category_id')
-        .exists()
-        .notEmpty().withMessage('el ID de la categoria es requerido')
-        .isNumeric().withMessage('el ID de la categoria debe ser un número'),
     body('description')
         .isString().withMessage('la descripcion debe ser una cadena de caracteres'),
     body('model')

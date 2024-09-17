@@ -1,4 +1,5 @@
 import { Model, DataTypes, Sequelize, ForeignKey } from "sequelize";
+import { InventoryModel } from "./inventory";
 
 export class EquipmentModel extends Model {
     declare description: string | null;
@@ -8,6 +9,7 @@ export class EquipmentModel extends Model {
     declare state: string;
     declare category_id: ForeignKey<number>;
     declare user_id: ForeignKey<number>;
+    declare inventoy?: InventoryModel[];
 
     static initModel(instancia: Sequelize) {
         EquipmentModel.init({

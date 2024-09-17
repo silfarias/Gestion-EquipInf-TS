@@ -31,7 +31,16 @@ export class InventoryService {
 
     public async getAllInventories(): Promise<InventoryModel[]> {
         try {
-            return await InventoryModel.findAll();
+            const inventories = await InventoryModel.findAll({
+                include: [{
+                    model: EquipmentModel,
+                    as: 'equipment'
+                }]
+            });
+            if (!inventories) {
+                throw new Error('Inventarios no encontrados');
+            }
+            return inventories;
         } catch (error) {
             console.error('Error al obtener inventarios', error);
             throw error;
@@ -51,15 +60,17 @@ export class InventoryService {
         }
     }
 
-    public async deleteEquip(id: number): Promise<{ message: string }> {
+    public async deleteInvEquip(id: number): Promise<{ message: string }> {
         try {
-            const result = await InventoryModel.destroy({ where: { id } });
-            if (!result) {
+            const inventory = await InventoryModel.findByPk(id);
+            if (!inventory) {
                 throw new Error('Inventario no encontrado');
             }
-            return { message: 'Inventario eliminado' };
+            await InventoryModel.destroy({ where: { id } });
+            await EquipmentModel.destroy({ where: { id: inventory.equipment_id } });
+            return { message: 'Inventario y equipo eliminados' };
         } catch (error) {
-            console.error("Error al borrar inventario:", error);
+            console.error("Error al borrar inventario y equipo:", error);
             throw error;
         }
     }

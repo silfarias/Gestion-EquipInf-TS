@@ -1,5 +1,6 @@
 import { EquipmentModel } from "../models/equipment";
 import { InferCreationAttributes } from "sequelize";
+import { InventoryModel } from "../models/inventory";
 
 export class EquipmentService {
 
@@ -22,13 +23,22 @@ export class EquipmentService {
         }
     }
 
-    public async getEquipById(id: number): Promise<EquipmentModel> {
+    public async getEquipById(id: number): Promise<any> {
         try {
-            const equip = await EquipmentModel.findByPk(id);
-            if (!equip) {
-                throw new Error('equipo informático no encontrado')
-            }
-            return equip
+            const equip = await EquipmentModel.findByPk(id, {
+                include: [{ 
+                    model: InventoryModel,
+                    as: 'inventory',
+                    attributes: ['location', 'unit_price', 'stock']
+                }],
+            });
+            if (!equip) throw new Error('equipo informático no encontrado')
+            const equipData = equip.get({ plain: true });
+            const inventory = equipData.inventory?.length ? equipData.inventory[0] : null;
+            return {
+                ...equipData,
+                inventory
+            };
         } catch (error) {
             console.error('error al obtener equipo informático', error);
             throw error;
@@ -48,13 +58,18 @@ export class EquipmentService {
         }
     }
 
-    public async updateEquip(id: number, equipUpdate: Object): Promise<EquipmentModel | void> {
+    public async updateEquip(id: number, equipUpdate: Partial<EquipmentModel>, location: string, unit_price: number, stock: number): Promise<EquipmentModel | void> {
         try {
-            const user = await EquipmentModel.findByPk(id);
-            if (!user) {
-                throw new Error('equipo informático no encontrado')
+            const equip = await EquipmentModel.findByPk(id);
+            if (!equip) throw new Error('equipo informático no encontrado')
+            await equip.update(equipUpdate)
+            const inventories = await InventoryModel.findAll({ where: { equipment_id: id } });
+            if (inventories.length > 0) {
+                for (const inventory of inventories) {
+                    await inventory.update({ location, unit_price, stock });
+                }
             }
-            return await user.update(equipUpdate)
+            return equip;
         } catch (error) {
             console.log('error al editar equipo informático', error);
             throw error;

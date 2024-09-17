@@ -53,10 +53,11 @@ export class InventoryController {
     public deleteInventory = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { id } = req.params;
-            const result = await this.inventoryService.deleteEquip(Number(id));
+            const result = await this.inventoryService.deleteInvEquip(Number(id));
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(500).json({ message: 'Error al eliminar inventario', error });
+            console.log(error);
+            return res.status(500).json({ message: 'Error al eliminar inventario y equipo', error });
         }
-    }
+    };
 }

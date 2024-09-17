@@ -1,15 +1,11 @@
 import { toast } from 'sonner';
 import { urlBack } from '../constants/urlBack';
 import { useNavigate } from 'react-router-dom';
-
-export type Inputs = {
-    user_name: string,
-    password: string
-};
+import { InputsLogin } from '../types/input.types';
 
 export const useFormLogin = () => {
     const navigate = useNavigate();
-    const onSubmit = async (data: Inputs) => {
+    const onSubmit = async (data: InputsLogin) => {
         try {
             const response = await fetch(`${urlBack}/auth/login`, {
                 method: 'POST',

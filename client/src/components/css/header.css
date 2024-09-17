@@ -1,20 +1,31 @@
+@font-face {
+    font-family: 'Arcade';
+    src: url('../../fonts/Dash-Horizon-Demo.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .header {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px;
+    padding: 15px 0 15px 0;
+    max-height: 45px;
+    box-sizing: content-box;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    max-height: 30px;
+    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-family: 'Arcade';
+    font-size: 2.4rem;
     color: #7b2cbf;
 }
 

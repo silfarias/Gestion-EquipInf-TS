@@ -51,10 +51,13 @@ export function defineRelations(sequelize: Sequelize) {
 
     // equipamiento e inventario
     EquipmentModel.hasMany(InventoryModel, {
-        foreignKey: 'equipment_id'
+        foreignKey: 'equipment_id',
+        as: 'inventory'
     });
     InventoryModel.belongsTo(EquipmentModel, {
-        foreignKey: 'equipment_id'
+        foreignKey: 'equipment_id',
+        as: 'equipment',
+        onDelete: 'CASCADE',
     });
     
     // cliente y facturas
