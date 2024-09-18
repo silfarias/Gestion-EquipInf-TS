@@ -6,6 +6,7 @@ import { FormRegister } from '../components/FormRegister';
 import { PublicRoutesConfig } from './PublicRoutes';
 import { PrivateRoutesConfig } from './PrivateRoutes';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { FormPurchase } from '../components/FormPurchase';
 
 export const AppRouter = () => (
 	<BrowserRouter>
@@ -20,6 +21,7 @@ export const AppRouter = () => (
 			<Route element={<PrivateRoutesConfig redirecTo="/" />}>
 				<Route path="/storage" element={<EquipmentPage />} />
 				<Route path="/edit/:id" element={<FormEditEquip/>} />
+				<Route path='/purchase/:id' element={<FormPurchase />} />
 			</Route>
 
 			<Route path="*" element={<NotFoundPage />} />

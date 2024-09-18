@@ -19,6 +19,7 @@ export const FormLogin = () => {
                         <input
                             id="user_name"
                             required
+                            placeholder="Ingresa tu nombre de usuario"
                             {...register('user_name')}
                         />
                     </div>
@@ -27,6 +28,7 @@ export const FormLogin = () => {
                         <input
                             id="password"
                             type="password"
+                            placeholder="Ingresa tu contraseña"
                             required
                             {...register('password')}
                         />

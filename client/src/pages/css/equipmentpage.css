@@ -127,3 +127,11 @@
     display: flex;
     gap: 10px;
 }
+
+.sell-button {
+    background-color: #7b2cbf;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px;
+}

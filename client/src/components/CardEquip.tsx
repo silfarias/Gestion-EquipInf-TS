@@ -53,6 +53,13 @@ export const CardEquip = () => {
                                         size={22}
                                         onClick={() => deleteEquip(equip.id)}
                                     />
+                                    <button 
+                                        type="button" 
+                                        className='sell-button'
+                                        onClick={() => navigate(`/purchase/${equip.equipment_id}`)}
+                                        >
+                                            Entregar a Organización
+                                    </button>
                                 </div>
                             </div>
                         </div>

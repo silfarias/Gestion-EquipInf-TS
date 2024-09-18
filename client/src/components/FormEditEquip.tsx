@@ -29,7 +29,7 @@ export const FormEditEquip = () => {
     const submitHandler = (data: InputsUpd) => {
         updateEquip(data);
     };
-    
+
     return (
         <>
             <div className="contenedor-todo">
@@ -78,7 +78,12 @@ export const FormEditEquip = () => {
 
                             <div className="caja-inputs">
                                 <label htmlFor="location">Ubicación</label>
-                                <input {...register('inventory.location')} placeholder="Ubicación" />
+                                <select {...register('inventory.location')} id="location">
+                                    <option value="">Seleccione la Sucursal</option>
+                                    <option value="Ofinina Central">Oficina Central</option>
+                                    <option value="Sucursal 2">Sucursal 2</option>
+                                    <option value="Sucursal 3">Sucursal 3</option>
+                                </select>
                             </div>
 
                             <div className="caja-inputs">
@@ -95,7 +100,7 @@ export const FormEditEquip = () => {
                                 <label htmlFor="description">Descripción</label>
                                 <input {...register('description')} placeholder="Descripción" />
                             </div>
-                            
+
                             <div className="form-buttons">
                                 <button type="button" className="cancel-button" onClick={() => navigate(-1)}>Cancelar</button>
                                 <button type="submit" className="save-button">Actualizar</button>

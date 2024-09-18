@@ -71,7 +71,12 @@ export const FormEquip = ({ isOpen, onClose }: FormEquipModalProps) => {
 
                         <div className="caja-inputs">
                             <label htmlFor="location">Ubicación</label>
-                            <input {...register("location")} id="location" />
+                            <select {...register("location")} id="location">
+                                <option value="">Seleccione la Sucursal</option>
+                                <option value="Ofinina Central">Oficina Central</option>
+                                <option value="Sucursal 2">Sucursal 2</option>
+                                <option value="Sucursal 3">Sucursal 3</option>
+                            </select>
                         </div>
 
                         <div className="caja-inputs">

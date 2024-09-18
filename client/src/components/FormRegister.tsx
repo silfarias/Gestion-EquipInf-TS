@@ -19,6 +19,7 @@ export const FormRegister = () => {
                         <input
                             id="user_name"
                             required
+                            placeholder="Ingresa tu nombre de usuario"
                             {...register('user_name')}
                         />
                     </div>
@@ -27,6 +28,7 @@ export const FormRegister = () => {
                         <input
                             id="email"
                             required
+                            placeholder="Ingresa tu email"
                             {...register('email')}
                         />
                     </div>
@@ -36,6 +38,7 @@ export const FormRegister = () => {
                             id="password"
                             type="password"
                             required
+                            placeholder="Ingresa tu contraseña"
                             {...register('password')}
                         />
                     </div>
