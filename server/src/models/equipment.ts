@@ -7,6 +7,7 @@ export class EquipmentModel extends Model {
     declare mark: string;
     declare date_acquisition: string;
     declare state: string;
+    declare image: string | null;
     declare category_id: ForeignKey<number>;
     declare user_id: ForeignKey<number>;
     declare inventoy?: InventoryModel[];

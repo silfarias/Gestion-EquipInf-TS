@@ -45,7 +45,6 @@ export const CardEquip = () => {
                             </button>
                             <div className={`equipment-card-details ${expandedEquip === equip.id ? 'expand' : ''}`}>
                                 <p>Descripción: {equip.equipment.description}</p>
-                                <p>Precio unitario: ${equip.unit_price} </p>
                                 <p>Ubicación: {equip.location}</p>
                                 <div className='equipment-options'>
                                     <FiEdit size={22} onClick={() => navigate(`/edit/${equip.equipment_id}`)} />

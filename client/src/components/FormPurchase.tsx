@@ -1,30 +1,21 @@
 import { useNavigate } from 'react-router-dom';
 import { useGetClients } from '../hooks/useGetClients';
-import './css/formpurchase.css'
 import { usePurchase } from '../hooks/usePurchase';
 import { InputsPurchase } from '../types/input.types';
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
+import './css/formpurchase.css'
 
-export const FormPurchase = ({ price, stock }: { price: number, stock: number }) => {
-    const { register, handleSubmit, watch } = useForm<InputsPurchase>();
-    const { onSubmit, calculateTotal, total } = usePurchase();
+export const FormPurchase = ({ stock }: { stock: number }) => {
+    const { register, handleSubmit } = useForm<InputsPurchase>();
+    const { onSubmit, } = usePurchase();
     const { clients } = useGetClients();
     const navigate = useNavigate();
-
-    const quantity = watch('quantity');
-
-    useEffect(() => {
-        if (quantity && price) {
-            calculateTotal(Number(quantity), price);
-        }
-    }, [quantity, price]);
 
     return (
         <>
             <div className="contenedor-todo">
                 <div className="container-purchase">
-                    <h2 className="modal-title">Vender equipo informático a Organización</h2>
+                    <h2 className="modal-title">Entreagr equipo informático a Organización</h2>
                     <h3>Equipo: </h3>
                     <form className="form-purchase" onSubmit={handleSubmit(onSubmit)}>
                         <div className="caja-inputs">
@@ -48,10 +39,6 @@ export const FormPurchase = ({ price, stock }: { price: number, stock: number })
                                     max: stock,
                                 })}
                             />
-                        </div>
-
-                        <div className="caja-inputs">
-                            <p>Total a pagar: ${total}</p>
                         </div>
 
                         <div className="form-buttons">
