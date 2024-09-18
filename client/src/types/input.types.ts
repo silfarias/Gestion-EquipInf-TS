@@ -36,3 +36,11 @@ export type InputsUpd = {
         stock: number;
     };
 };
+
+export type InputsPurchase = {
+    id: number;
+    quantity: number;
+    client_id: number;
+    equipment_id: number;
+    total: number;
+};

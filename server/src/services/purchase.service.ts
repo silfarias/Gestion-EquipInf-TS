@@ -3,9 +3,8 @@ import { PurchaseDetailsModel } from "../models/purchase_details";
 import { InventoryModel } from "../models/inventory";
 import { ClientsModel } from "../models/clients";
 
-
 export class PurchaseService {
-    public async createPurchase(purchase: InferCreationAttributes<PurchaseDetailsModel>): Promise<PurchaseDetailsModel | void> {
+    public async createPurchase(purchase: InferCreationAttributes<PurchaseDetailsModel>): Promise<{ message: string, data: PurchaseDetailsModel }> {
         const { client_id, equipment_id, quantity } = purchase;
         try {
             const client = await ClientsModel.findByPk(client_id);
@@ -26,7 +25,7 @@ export class PurchaseService {
                 ...purchase,
                 total,
             });
-            return newPurchase;
+            return { message: 'Equipo vendido exitosamente', data: newPurchase };
         } catch (error) {
             console.error('error al registrar compra', error);
             throw error;

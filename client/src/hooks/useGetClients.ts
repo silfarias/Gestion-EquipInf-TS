@@ -32,4 +32,4 @@ export const useGetClients = (): { clients: Clients[] } => {
         }
     }, [token]);
     return { clients };
-}
+};
