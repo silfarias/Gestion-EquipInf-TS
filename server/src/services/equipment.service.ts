@@ -12,7 +12,7 @@ export class EquipmentService {
             console.error('error al cargar equipo informático', error)
             throw error
         }
-    }
+    };
 
     public async getAllEquipments(): Promise<EquipmentModel[] | void> {
         try {
@@ -21,7 +21,7 @@ export class EquipmentService {
             console.error('error al obtener equipos', error)
             throw error
         }
-    }
+    };
 
     public async getEquipById(id: number): Promise<any> {
         try {
@@ -43,7 +43,7 @@ export class EquipmentService {
             console.error('error al obtener equipo informático', error);
             throw error;
         }
-    }
+    };
 
     public async deleteEquip(id: number): Promise<{ message: string }> {
         try {
@@ -56,7 +56,7 @@ export class EquipmentService {
             console.error("error al borrar equipo:", error);
             throw error;
         }
-    }
+    };
 
     public async updateEquip(id: number, equipUpdate: Partial<EquipmentModel>, inventoryData: Partial<InventoryModel>): Promise<EquipmentModel | void> {
         try {
@@ -72,5 +72,5 @@ export class EquipmentService {
             console.log('error al editar equipo informático', error);
             throw error;
         }
-    }
+    };
 };

@@ -1,15 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { AuthContext } from "../context/AuthContext";
 import { LogoutProps } from "../types/props.types";
+import { useAuthCont } from "./useAuthCont";
 
 export const useLogout = (): LogoutProps => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const authContext = useContext(AuthContext);
-    if (!authContext) throw new Error("useLogout must be used within an AuthProvider");
-    const { logoutUser, userState } = authContext;
+    const { logoutUser, userState } = useAuthCont();
 
     useEffect(() => {
         if (userState.isLogged) {

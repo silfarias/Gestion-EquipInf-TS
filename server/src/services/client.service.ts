@@ -10,7 +10,7 @@ export class ClientService {
             console.error('error al registrar cliente', error);
             throw error;
         }
-    }
+    };
 
     public async getAllClients(): Promise<ClientsModel[] | void> {
         try {
@@ -23,7 +23,7 @@ export class ClientService {
             console.log('error al obtener clientes', error);
             throw error;
         }
-    }
+    };
 
     public async getClientById(id: number): Promise<ClientsModel | void> {
         try {
@@ -36,7 +36,7 @@ export class ClientService {
             console.log('error al obtener el cliente', error);
             throw error;
         }
-    }
+    };
 
     public async deleteClient(id: number): Promise<{ message: string }> {
         try {
@@ -46,7 +46,7 @@ export class ClientService {
             console.log("error al borrar cliente:", error);
             throw error;
         }
-    }
+    };
 
     public async updateClient(id: number, clientUpdate: Object): Promise<ClientsModel | void> {
         try {
@@ -59,5 +59,5 @@ export class ClientService {
             console.log('error al editar usuario', error);
             throw error;
         }
-    }
+    };
 };

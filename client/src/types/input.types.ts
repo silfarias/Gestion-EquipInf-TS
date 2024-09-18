@@ -3,6 +3,12 @@ export type InputsLogin = {
     password: string
 };
 
+export type InputsRegister = {
+    user_name: string,
+    email: string,
+    password: string
+};
+
 export type Inputs = {
     model: string;
     mark: string;

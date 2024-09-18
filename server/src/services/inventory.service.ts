@@ -14,7 +14,7 @@ export class InventoryService {
             console.log('Error al cargar al inventario', error);
             throw error;
         }
-    }
+    };
 
     public async updateInventory(id: number, inventoryUpdate: Partial<InferCreationAttributes<InventoryModel>>): Promise<InventoryModel> {
         try {
@@ -27,7 +27,7 @@ export class InventoryService {
             console.log('Error al editar inventario', error);
             throw error;
         }
-    }
+    };
 
     public async getAllInventories(): Promise<InventoryModel[]> {
         try {
@@ -58,7 +58,7 @@ export class InventoryService {
             console.error('Error al obtener inventario', error);
             throw error;
         }
-    }
+    };
 
     public async deleteInvEquip(id: number): Promise<{ message: string }> {
         try {
@@ -73,5 +73,5 @@ export class InventoryService {
             console.error("Error al borrar inventario y equipo:", error);
             throw error;
         }
-    }
+    };
 };

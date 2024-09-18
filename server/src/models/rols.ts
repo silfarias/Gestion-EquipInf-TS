@@ -1,7 +1,7 @@
 import { Model, DataTypes, Sequelize, InferAttributes, InferCreationAttributes } from "sequelize";
 
-export class RolModel extends Model<InferAttributes<RolModel>, InferCreationAttributes<RolModel>>  {
-
+export class RolModel extends Model {
+    declare id: number;
     declare name: string; // al utilizar declare garantizamos que TS no omitirá el campo
 
     static initModel(instancia: Sequelize) { // static para que la clase sea accesible sin necesidad de crear una instancia

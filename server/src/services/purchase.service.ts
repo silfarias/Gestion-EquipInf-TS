@@ -31,7 +31,7 @@ export class PurchaseService {
             console.error('error al registrar compra', error);
             throw error;
         }
-    }
+    };
 
     public async getAllPurchases(): Promise<PurchaseDetailsModel[] | void> {
         try {
@@ -40,7 +40,7 @@ export class PurchaseService {
             console.error('error al obtener los registros de compra', error)
             throw error
         }
-    }
+    };
 
     public async getPurchaseById(id: number): Promise<PurchaseDetailsModel> {
         try {
@@ -53,5 +53,5 @@ export class PurchaseService {
             console.error('error al obtener el registro de compra', error);
             throw error;
         }
-    }
+    };
 };

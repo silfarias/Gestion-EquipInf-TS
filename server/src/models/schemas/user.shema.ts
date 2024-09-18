@@ -1,9 +1,9 @@
 import { body, param, ValidationChain } from 'express-validator';
 
 export const validateUserSchema: ValidationChain[] = [
-    param('rol_id')
-        .exists({ checkNull: true, checkFalsy: true }).withMessage('El ID del rol es obligatorio.')
-        .isNumeric().withMessage('El ID del rol debe ser un número.'),
+    // param('rol_id')
+    //     .exists({ checkNull: true, checkFalsy: true }).withMessage('El ID del rol es obligatorio.')
+    //     .isNumeric().withMessage('El ID del rol debe ser un número.'),
         
     body('user_name')
         .exists({ checkNull: true, checkFalsy: true }).withMessage('El nombre de usuario es obligatorio.')

@@ -3,23 +3,28 @@ import { hashString } from "../utils/hash";
 import { InferCreationAttributes } from "sequelize";
 import { createJWT } from "../utils/jwt";
 import bcrypt from 'bcrypt';
+import { RolModel } from "../models/rols";
 
 export class UserService {
     // registro
     // utilizamos infercreationattributes para crear un nuevo registro en la db con los tipos necesarios 
     // especificados en el modelo 
-    public async register(user: InferCreationAttributes<UserModel>): Promise<UserModel | void> {
+    public async register(user: InferCreationAttributes<UserModel>): Promise<{ message: string, user: Object }| void> {
         try {
+            const roleDf = await RolModel.findOne({ where: { name: 'employee' } });
+            if (!roleDf) throw new Error('rol no encontrado');
+            user.rol_id = roleDf.id;
             if (user.password) {
                 const hashPassword = await hashString(user.password);
                 user.password = hashPassword;
             }
-            return await UserModel.create(user);
+            const usuario = await UserModel.create(user);
+            return { message: 'Usuario registrado exitosamente', user };
         } catch (error) {
             console.error('error al registrar usuario', error);
             throw error;
         }
-    }
+    };
 
     // login
     public async login(user_name: string, password: string): Promise<{ message: string, user: Object, token: string } | void> {
@@ -41,7 +46,7 @@ export class UserService {
             console.log('error al loguear usuario', error);
             throw error;
         }
-    }
+    };
 
     public async getAllUsers(): Promise<UserModel[] | void> {
         try {
@@ -54,7 +59,7 @@ export class UserService {
             console.log('error al obtener usuarios', error);
             throw error;
         }
-    }
+    };
 
     public async getUserById(id: number): Promise<UserModel | void> {
         try {
@@ -67,7 +72,7 @@ export class UserService {
             console.log('error al obtener el usuario', error);
             throw error;
         }
-    }
+    };
 
     public async deleteUser(id: number): Promise<{ message: string }> {
         try {
@@ -77,7 +82,7 @@ export class UserService {
             console.log("error al borrar usuario:", error);
             throw error;
         }
-    }
+    };
 
     public async updateUser(id: number, userUpdate: Object): Promise<UserModel | void> {
         try {
@@ -90,5 +95,5 @@ export class UserService {
             console.log('error al editar usuario', error);
             throw error;
         }
-    }
+    };
 };

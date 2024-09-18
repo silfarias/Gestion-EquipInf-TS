@@ -11,13 +11,16 @@ export class UserController {
 
     public register = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const { rol_id } = req.params;
             const userData = req.body;
-            userData.rol_id = Number(rol_id);
+            if (!userData.user_name || !userData.email || !userData.password) {
+                return res.status(400).json({
+                    message: "Faltan campos obligatorios: user_name, email, password"
+                });
+            }
             const user = await this.userService.register(userData);
             return res.status(201).json(user);
-        } catch (error) {
-            return handleControllerError(error, res); 
+        } catch (error: unknown) {
+            return handleControllerError(error, res);
         }
     }
 

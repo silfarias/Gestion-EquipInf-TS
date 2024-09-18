@@ -1,12 +1,12 @@
-import { useFormLogin } from "../hooks/useFormLogin";
 import { useForm } from 'react-hook-form';
-import { InputsLogin } from "../types/input.types";
+import { InputsRegister } from "../types/input.types";
+import { useRegister } from '../hooks/useRegister';
 import './css/formlogin.css'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-export const FormLogin = () => {
-    const { register, handleSubmit } = useForm<InputsLogin>();
-    const { onSubmit } = useFormLogin()
+export const FormRegister = () => {
+    const { register, handleSubmit } = useForm<InputsRegister>();
+    const { onSubmit } = useRegister()
 
     return (
         <>
@@ -23,6 +23,14 @@ export const FormLogin = () => {
                         />
                     </div>
                     <div className="form-group-login">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            id="email"
+                            required
+                            {...register('email')}
+                        />
+                    </div>
+                    <div className="form-group-login">
                         <label htmlFor="password">Password</label>
                         <input
                             id="password"
@@ -31,9 +39,9 @@ export const FormLogin = () => {
                             {...register('password')}
                         />
                     </div>
-                    <button type="submit" className="submit-login">Ingresar</button>
+                    <button type="submit" className="submit-login">Registrarse</button>
                     <div className="form-login-options">
-                        <p>No tienes una cuenta? <Link to="/register">Registrate</Link></p>
+                        <p>Ya tienes una cuenta? <Link to="/">Loguearse</Link></p>
                     </div>
                 </form>
             </div>
